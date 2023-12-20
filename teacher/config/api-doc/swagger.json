@@ -1,0 +1,144 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Arch School Project - Test",
+        "description": "Teacher's and Student's side. Here it is possible to enroll a student with their grades, update existing students and see all students along with their grades and their evaluation based on the average. And as a student on the 'student side', you can see your grades and evaluation.",
+        "termsOfService": "http://localhost:3000/api-doc-terms",
+        "contact": {
+            "email": "victornuneshvh10@gmail.com" 
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Teacher Side"
+        },
+        {
+            "url": "http://localhost:8080",
+            "description": "Student Side"
+        }
+    ],
+    "paths": {
+        "/student": {
+            "post": {
+                "summary": "Create a new Student - Teacher Side",
+                "description": "Seven 'id' if you want to make an UPDATE on an already registered student. This request is used to create/update, according to: Whether there is 'id' in the body or not.",
+                "tags": ["Student"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            }
+                        },
+                        "exemples": {
+                            "studentCreate": {
+                                "value": {
+                                    "name": "Pedro Lucas",
+                                    "n1": 6.5,
+                                    "n2": 9,
+                                    "n3": 7.5,
+                                    "n4": 8.5
+                                }
+                            },
+                            "studantUpdate": {
+                                "value": {
+                                    "n1": 6.5,
+                                    "n2": 9,
+                                    "n3": 7.5,
+                                    "n4": 8.5
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "(Set all the notes to update) or (Set all infos)"
+                    },
+                    "204": {
+                        "description": "Studandt updated successfully"
+                    },
+                    "201": {
+                        "description": "Student created successfully"
+                    }
+                }
+            },
+            "get": {
+                "summary": "GET all Students infos - Teacher Side",
+                "tags": ["Student"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "item": {
+                                        "$ref": "#/components/schemas/Student"
+                                    }       
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/student/{id}": {
+            "get": {
+                "summary": "Get Student By ID - Student Side",
+                "description": "Enter the ID of the student who wants to receive the information: Name, Grades, Average and Assessment",
+                "tags": ["Student"],
+                "parameters": [ 
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student ID you want",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Student"                                 
+                                }
+                            }
+                        }
+                    }, 
+                    "400": {
+                        "description": "Student not exists"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Student": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "n1": {
+                        "type": "number"
+                    },
+                    "n2": {
+                        "type": "number"
+                    },
+                    "n3": {
+                        "type": "number"
+                    },
+                    "n4": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
