@@ -18,4 +18,4 @@ CREATE TABLE notas (
 #API Documentation:
 
 When starting the "teacher" and "student" application, access "http://localhost:3000/api-doc/" 
-to read the documentation and use the project.
+to read the documentation and use the project.   
