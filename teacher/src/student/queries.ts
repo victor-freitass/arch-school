@@ -1,7 +1,5 @@
 class Queries {
-    insertStudent = 'INSERT INTO aluno (name) VALUES ($1)';
-    getNewStudentId = 'SELECT MAX(ID) FROM aluno';
-
+    insertStudent = 'INSERT INTO aluno (name) VALUES ($1) RETURNING *';
     insertNotas = 'INSERT INTO notas (idaluno, n1, n2, n3, n4, media) VALUES ($1, $2, $3, $4, $5, $6)';
     updateNotas = 'UPDATE notas SET n1 = $2, n2 = $3, n3 = $4, n4 = $5, media = $6 WHERE idaluno = $1';
 

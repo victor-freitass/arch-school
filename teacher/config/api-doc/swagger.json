@@ -23,7 +23,7 @@
         "/student": {
             "post": {
                 "summary": "Create a new Student - Teacher Side",
-                "description": "Seven 'id' if you want to make an UPDATE on an already registered student. This request is used to create/update, according to: Whether there is 'id' in the body or not.",
+                "description": "Set 'studentId' IN BODY if you want to make an UPDATE on an already registered student. This request is used to create/update, according to: Whether there is 'studentId' in the body or not.",
                 "tags": ["Student"],
                 "requestBody": {
                     "content": {

@@ -15,7 +15,16 @@ CREATE TABLE notas (
     media real
 );
 
+create a .env file in each folder with the database configuration.
+Exemple:
+DB_HOST=localhost
+DB_USER=(...)
+DB_NAME=(...)
+DB_PASSWORD=(...)
+DB_PORT=(...)
+PORT=(3000 teacher side - 8080 student side)
+
 #API Documentation:
 
 When starting the "teacher" and "student" application, access "http://localhost:3000/api-doc/" 
-to read the documentation and use the project.   
+to read the documentation and use the project.

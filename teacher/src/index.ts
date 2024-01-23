@@ -9,7 +9,6 @@ import swaggerUi from 'swagger-ui-express';
 import swaggetJson from '../config/api-doc/swagger.json';
 import termsJson from '../config/api-doc/terms.json';
 
-
 class App { 
     express: Express;
 
