@@ -33,7 +33,7 @@ class App {
 
     connection () {
         client.connect().then(_ => {
-            this.express.listen(process.env.PORT, () => console.log('Teacher API on...'));
+            this.express.listen(3000, () => console.log('Teacher API on...'));
         }).catch(e => console.log(e));
     }
 }

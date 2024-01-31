@@ -25,7 +25,7 @@ class App {
 
     connection () {
         client.connect().then(_ => {
-            this.express.listen(process.env.PORT, () => console.log('Student API on...'))
+            this.express.listen(8080, () => console.log('Student API on...'))
         }).catch(e => console.log(e));
     }
 }
