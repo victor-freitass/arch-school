@@ -1,14 +1,14 @@
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
 
-const port: unknown = process.env.DB_PORT;
-const portAsNumber = port as number;
+dotenv.config();
 
 const client = new Pool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: portAsNumber
+    host: 'db',
+    user: process.env.POSTGRES_USER,
+    database: process.env.POSTGRES_DB,
+    password: process.env.POSTGRES_PASSWORD,
+    port: 5432
 });
 
 export default client;
