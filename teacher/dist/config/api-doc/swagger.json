@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Arch School Project - Teacher API",
+        "description": "Teacher's side. Here it is possible to enroll a student with their grades, update existing students and see all students along with their grades and their evaluation based on the average.",
+        "termsOfService": "http://localhost:3000/api-doc-terms",
+        "contact": {
+            "email": "victornuneshvh10@gmail.com"
+        },
+        "version": "2.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Teacher Side"
+        }
+    ],
+    "paths": {
+        "/student": {
+            "post": {
+                "summary": "Create or update students",
+                "description": "Set 'studentId' IN BODY if you want to make an UPDATE on an already registered student. This request is used to create/update, according to: Whether there is 'studentId' in the body or not.",
+                "tags": ["Student"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student Create"
+                            }
+                        },
+                        "exemples": {
+                            "studentCreate": {
+                                "value": {
+                                    "name": "Pedro Lucas",
+                                    "n1": 6.5,
+                                    "n2": 9,
+                                    "n3": 7.5,
+                                    "n4": 8.5
+                                }
+                            },
+                            "studantUpdate": {
+                                "value": {
+                                    "studentId": 1,
+                                    "n1": 5,
+                                    "n2": 9.5,
+                                    "n3": 7.5,
+                                    "n4": 8
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "(Set all the notes to update) or (Set all infos)"
+                    },
+                    "204": {
+                        "description": "Studandt updated successfully"
+                    },
+                    "201": {
+                        "description": "Student created successfully"
+                    }
+                }
+            },
+            "get": {
+                "summary": "GET all Students infos",
+                "tags": ["Student"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "item": {
+                                        "$ref": "#/components/schemas/Get All Students"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Student Create": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "n1": {
+                        "type": "number"
+                    },
+                    "n2": {
+                        "type": "number"
+                    },
+                    "n3": {
+                        "type": "number"
+                    },
+                    "n4": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Student Update": {
+                "type": "object",
+                "properties": {
+                    "studentId": {
+                        "type": "number"
+                    },
+                    "n1": {
+                        "type": "number"
+                    },
+                    "n2": {
+                        "type": "number"
+                    },
+                    "n3": {
+                        "type": "number"
+                    },
+                    "n4": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Get All Students": {
+                "type": "array",
+                "properties": {
+                    "studentId": {
+                        "type": "number"
+                    },
+                    "n1": {
+                        "type": "number"
+                    },
+                    "n2": {
+                        "type": "number"
+                    },
+                    "n3": {
+                        "type": "number"
+                    },
+                    "n4": {
+                        "type": "number"
+                    },
+                    "average": {
+                        "type": "number"
+                    },
+                    "assessment": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,81 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Arch School Project - Student API",
+        "description": "Student's side. You can see your grades and evaluation, passing your registration ID.",
+        "termsOfService": "http://localhost:8080/api-doc-terms",
+        "contact": {
+            "email": "victornuneshvh10@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Student Side"
+        }
+    ],
+    "paths": {
+        "/student/{id}": {
+            "get": {
+                "summary": "Get student grades, average and assessment",
+                "description": "Set ID of the student who wants to receive the information: Name, Grades, Average and Assessment",
+                "tags": ["Student"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student ID you want",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Student"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Student not exists"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Student": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "n1": {
+                        "type": "number"
+                    },
+                    "n2": {
+                        "type": "number"
+                    },
+                    "n3": {
+                        "type": "number"
+                    },
+                    "n4": {
+                        "type": "number"
+                    },
+                    "average": {
+                        "type": "number"
+                    },
+                    "assessment": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
