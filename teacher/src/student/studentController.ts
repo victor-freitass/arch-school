@@ -18,7 +18,8 @@ class StudentController {
 
             const media = ((n1 + n2 + n3 + n4) / 4).toFixed(2);
 
-            //achar no banco 1*!!!
+            if (!(await client.query(queries.getStudentById)).rows[0])
+            return res.status(400).send('Student not exists');
 
             client.query(queries.updateNotas, [studentId, n1, n2, n3, n4, media], err => {
                 if (err) {
