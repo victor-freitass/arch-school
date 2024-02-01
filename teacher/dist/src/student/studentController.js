@@ -18,11 +18,17 @@ class StudentController {
     createAndUpdate(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { name, n1, n2, n3, n4, studentId } = req.body;
+            if (!(name &&
+                (n1 || n1 === 0) &&
+                (n2 || n2 === 0) &&
+                (n3 || n3 === 0) &&
+                (n4 || n4 === 0)))
+                return ('Set all Infos');
             if (studentId) {
-                if (!n1 || !n2 || !n3 || !n4) {
-                    return res.status(400).send('Set all the notes to update');
-                }
                 const media = ((n1 + n2 + n3 + n4) / 4).toFixed(2);
+                const student = (yield connection_1.default.query(queries_1.default.getStudentById, [studentId])).rows[0];
+                if (!student)
+                    return res.status(400).send('Student not exists');
                 connection_1.default.query(queries_1.default.updateNotas, [studentId, n1, n2, n3, n4, media], err => {
                     if (err) {
                         console.log(err);
@@ -32,9 +38,6 @@ class StudentController {
                 return res.status(204).send();
             }
             else {
-                if (!name || !n1 || !n2 || !n3 || !n4) {
-                    return res.status(400).send('Set all infos');
-                }
                 try {
                     const studentId = (yield connection_1.default.query(queries_1.default.insertStudent, [name])).rows[0].id;
                     const media = ((n1 + n2 + n3 + n4) / 4).toFixed(2);
