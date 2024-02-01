@@ -5,4 +5,8 @@ Chance "env_file" to ".env" file in each folder with the database configuration.
 - $ docker compose up -d
 
 # API Documentation:
-Access "http://localhost:3000/api-doc/" to read the documentation and use the project.
+Teacher API:
+- "http://localhost:3000/api-doc/"
+
+Student API 
+- "http://localhost:8080/api-doc/"
