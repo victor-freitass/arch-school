@@ -5,14 +5,20 @@ import queries from "./queries";
 class StudentController {
     async createAndUpdate (req: Request, res: Response) {
         const { name, n1, n2, n3, n4, studentId } = req.body;
+        console.log('Imagem nova!!  ')
+        if (
+            !(name && 
+            (n1 || n1 === 0) && 
+            (n2 || n2 === 0) && 
+            (n3 || n3 === 0) && 
+            (n4 || n4 === 0)) 
+        )  return ('Set all Infos');
 
-        if (studentId) { 
+        if (studentId) {
 
-            if (!n1 || !n2 || !n3 || !n4) { 
-                return res.status(400).send('Set all the notes to update');
-            }   
-            
             const media = ((n1 + n2 + n3 + n4) / 4).toFixed(2);
+
+            //achar no banco 1*!!!
 
             client.query(queries.updateNotas, [studentId, n1, n2, n3, n4, media], err => {
                 if (err) {
@@ -22,18 +28,14 @@ class StudentController {
             });
 
             return res.status(204).send();
-        } else { 
-
-            if (!name || !n1 || !n2 || !n3 || !n4) { 
-                return res.status(400).send('Set all infos');
-            } 
+        } else {
 
             try {
-                const studentId = (await client.query(queries.insertStudent, 
+                const studentId = (await client.query(queries.insertStudent,
                     [name])).rows[0].id;
 
                 const media = ((n1 + n2 + n3 + n4) / 4).toFixed(2);
-                
+
                 await client.query(queries.insertNotas, [studentId, n1, n2, n3, n4, media]);
             } catch (error) {
                 console.log(error);
