@@ -5,7 +5,7 @@ import queries from "./queries";
 class StudentController {
     async createAndUpdate (req: Request, res: Response) {
         const { name, n1, n2, n3, n4, studentId } = req.body;
-        console.log('Imagem nova!!  ')
+
         if (
             !(name && 
             (n1 || n1 === 0) && 
@@ -15,11 +15,11 @@ class StudentController {
         )  return ('Set all Infos');
 
         if (studentId) {
-
+             
             const media = ((n1 + n2 + n3 + n4) / 4).toFixed(2);
 
-            if (!(await client.query(queries.getStudentById)).rows[0])
-            return res.status(400).send('Student not exists');
+            const student = (await client.query(queries.getStudentById, [studentId])).rows[0];
+            if (!student) return res.status(400).send('Student not exists');
 
             client.query(queries.updateNotas, [studentId, n1, n2, n3, n4, media], err => {
                 if (err) {
